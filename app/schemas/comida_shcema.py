@@ -6,7 +6,7 @@ from app.models.comida_model import Comida
 from pydantic import Field as PydanticField
 
 class ComidaCreate(BaseModel):
-    id: uuid.UUID
+    # id: uuid.UUID
     name: str
     description: str
     price: Decimal = PydanticField(..., max_digits=10, decimal_places=2)
