@@ -1,11 +1,10 @@
 import uuid
+from typing import Optional
+from sqlalchemy import Column, func
+from sqlalchemy.types import UUID
 from sqlmodel import Field, SQLModel
-from sqlalchemy import Column
-from sqlalchemy.types import UUID, Numeric
-from sqlmodel import Field, SQLModel
-from sqlalchemy.types import UUID, Numeric
 
-class Categoria(SQLModel, table=True):
+class Category(SQLModel, table=True):
     __tablename__ = "categories"
     id: Optional[uuid.UUID] = Field(
         default=None,
@@ -15,4 +14,4 @@ class Categoria(SQLModel, table=True):
             primary_key=True
         )
     )
-    name: str = Field(max_length=255)
+    name: str = Field(max_length=100, unique=True)
