@@ -1,7 +1,7 @@
 import uuid
 from pydantic import BaseModel, Field as PydanticField
 from typing import TypeVar, Generic, List
-from app.models.category_model import Category
+from app.models.categorias_model import Category
 
 class CategoryCreate(BaseModel):
     name: str = PydanticField(..., max_length=100)
