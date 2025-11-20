@@ -33,7 +33,7 @@ class UsuarioRepository:
         db_usuario = self.get_usuario_by_id(id)
         if db_usuario:
             db_usuario.email = usuario_data.email
-            db_usuario.hashed_password = usuario_data.hashed_password
+            db_usuario.password_hash = usuario_data.password_hash
             db_usuario.user_type = usuario_data.user_type
             self.session.add(db_usuario)
             self.session.commit()

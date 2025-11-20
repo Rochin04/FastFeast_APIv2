@@ -15,5 +15,5 @@ class Usuario(SQLModel, table=True):
         )
     )
     email: str = Field(max_length=255, unique=True)
-    hashed_password: str = Field(max_length=255)
+    password_hash: str = Field(max_length=255)
     user_type: str = Field(max_length=50)#student, merchant

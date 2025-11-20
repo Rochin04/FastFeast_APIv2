@@ -5,7 +5,7 @@ from app.models.usuarios_model import Usuario
 
 class UsuarioCreate(BaseModel):
     email: str = PydanticField(..., max_length=255, unique=True)
-    hashed_password: str = PydanticField(..., max_length=255)
+    password_hash: str = PydanticField(..., max_length=255)
     user_type: str = PydanticField(..., max_length=50)
     class Config:
         orm_mode = True
