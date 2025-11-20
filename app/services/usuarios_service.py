@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException, status
 from sqlmodel import Session
 from app.db.session import get_session
 from app.repositories.usuario_repository import UsuarioRepository
-from app.schemas.usuarios_schema import UsuarioCreate
+from app.schemas.usuarios_schema import UsuarioCreate, UsuarioUpdate
 from app.models.usuarios_model import Usuario
 import uuid
 
@@ -22,7 +22,7 @@ class UsuarioService:
     def create_usuario(self, usuario: UsuarioCreate) -> Usuario:
         return self.repo.create_usuario(usuario)
 
-    def update_usuario(self, id: uuid.UUID, usuario_data: UsuarioCreate) -> Usuario:
+    def update_usuario(self, id: uuid.UUID, usuario_data: UsuarioUpdate) -> Usuario:
         updated_usuario = self.repo.update_usuario(id, usuario_data)
         if not updated_usuario:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuario not found")

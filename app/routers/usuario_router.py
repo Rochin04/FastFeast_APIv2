@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, status
-from app.schemas.usuarios_schema import UsuarioCreate, UsuarioResponse, UsuarioReadResponse, UsuarioListReadResponse
+from app.schemas.usuarios_schema import UsuarioCreate, UsuarioUpdate, UsuarioResponse, UsuarioReadResponse, UsuarioListReadResponse
 from app.services.usuarios_service import UsuarioService
 import uuid
 
@@ -21,7 +21,7 @@ async def create_usuario(usuario: UsuarioCreate, service: UsuarioService = Depen
     return {"data": db_usuario}
 
 @router.put("/usuarios/{id}", response_model=UsuarioResponse)
-async def update_usuario(id: uuid.UUID, usuario: UsuarioCreate, service: UsuarioService = Depends()):
+async def update_usuario(id: uuid.UUID, usuario: UsuarioUpdate, service: UsuarioService = Depends()):
     data = service.update_usuario(id, usuario)
     return {"data": data}
 
