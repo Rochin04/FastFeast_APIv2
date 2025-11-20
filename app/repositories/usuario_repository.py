@@ -1,6 +1,6 @@
 from sqlmodel import Session, select
 from app.models.usuarios_model import Usuario
-from app.schemas.usuarios_schema import UsuarioCreate
+from app.schemas.usuarios_schema import UsuarioCreate, UsuarioUpdate
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status
 import uuid
@@ -29,12 +29,11 @@ class UsuarioRepository:
             )
         return db_usuario
         
-    def update_usuario(self, id: uuid.UUID, usuario_data: UsuarioCreate) -> Usuario | None:
+    def update_usuario(self, id: uuid.UUID, usuario_data: UsuarioUpdate) -> Usuario | None:
         db_usuario = self.get_usuario_by_id(id)
         if db_usuario:
             db_usuario.email = usuario_data.email
             db_usuario.password_hash = usuario_data.password_hash
-            db_usuario.user_type = usuario_data.user_type
             self.session.add(db_usuario)
             self.session.commit()
             self.session.refresh(db_usuario)

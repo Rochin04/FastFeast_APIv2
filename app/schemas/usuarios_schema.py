@@ -17,6 +17,12 @@ class UsuarioRead(BaseModel):
     class Config:
         orm_mode = True
 
+class UsuarioUpdate(BaseModel):
+    email: str = PydanticField(..., max_length=255, unique=True)
+    password_hash: str = PydanticField(..., max_length=255)
+    class Config:
+        orm_mode = True
+
 T = TypeVar("T")
 class Respons(BaseModel, Generic[T]):
     data: T
