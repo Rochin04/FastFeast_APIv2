@@ -1,6 +1,6 @@
 from sqlmodel import Session, select
 from app.models.estudiante_model import Estudiante
-from app.schemas.estudiante_schema import EstudianteCreate
+from app.schemas.estudiante_schema import EstudianteCreate, EstudianteUpdate
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException, status
 import uuid
@@ -40,13 +40,12 @@ class EstudianteRepository:
             )
         return db_estudiante
 
-    def update_estudiante(self, user_id: uuid.UUID, estudiante_data: EstudianteCreate) -> Estudiante | None:
+    def update_estudiante(self, user_id: uuid.UUID, estudiante_data: EstudianteUpdate) -> Estudiante | None:
         db_estudiante = self.get_estudiante_by_id(user_id)
         if db_estudiante:
             db_estudiante.student_id_number = estudiante_data.student_id_number
             db_estudiante.full_name = estudiante_data.full_name
             db_estudiante.profile_picture_url = estudiante_data.profile_picture_url
-            db_estudiante.is_verified = estudiante_data.is_verified
             
             try:
                 self.session.add(db_estudiante)

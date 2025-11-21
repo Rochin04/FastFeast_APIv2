@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, status
-from app.schemas.estudiante_schema import EstudianteCreate, EstudianteResponse, EstudianteReadResponse, EstudianteListReadResponse
+from app.schemas.estudiante_schema import EstudianteCreate, EstudianteUpdate, EstudianteResponse, EstudianteReadResponse, EstudianteListReadResponse
 from app.services.estudiante_service import EstudianteService
 import uuid
 
@@ -19,11 +19,13 @@ async def read_estudiante(user_id: uuid.UUID, service: EstudianteService = Depen
 async def create_estudiante(estudiante: EstudianteCreate, service: EstudianteService = Depends()):
     db_estudiante = service.create_estudiante(estudiante)
     return {"data": db_estudiante}
+    ##No deberia pedirte el is_verified##
 
 @router.put("/estudiantes/{user_id}", response_model=EstudianteResponse)
-async def update_estudiante(user_id: uuid.UUID, estudiante: EstudianteCreate, service: EstudianteService = Depends()):
+async def update_estudiante(user_id: uuid.UUID, estudiante: EstudianteUpdate, service: EstudianteService = Depends()):
     data = service.update_estudiante(user_id, estudiante)
     return {"data": data}
+    ##No deberia pedirte el is_verifie ni el user_id##
 
 @router.delete("/estudiantes/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_estudiante(user_id: uuid.UUID, service: EstudianteService = Depends()):

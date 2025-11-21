@@ -8,7 +8,15 @@ class EstudianteCreate(BaseModel):
     student_id_number: str
     full_name: str
     profile_picture_url: Optional[str] = None
-    is_verified: bool = False
+    # is_verified: bool = False
+    
+    class Config:
+        orm_mode = True
+
+class EstudianteUpdate(BaseModel):
+    student_id_number: str
+    full_name: str
+    profile_picture_url: Optional[str] = None
     
     class Config:
         orm_mode = True

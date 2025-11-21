@@ -3,7 +3,7 @@ from sqlmodel import Session
 from app.db.session import get_session
 from app.repositories.estudiante_repository import EstudianteRepository
 from app.repositories.usuario_repository import UsuarioRepository
-from app.schemas.estudiante_schema import EstudianteCreate
+from app.schemas.estudiante_schema import EstudianteCreate, EstudianteUpdate
 from app.models.estudiante_model import Estudiante
 import uuid
 
@@ -32,7 +32,7 @@ class EstudianteService:
         
         return self.repo.create_estudiante(estudiante)
 
-    def update_estudiante(self, user_id: uuid.UUID, estudiante_data: EstudianteCreate) -> Estudiante:
+    def update_estudiante(self, user_id: uuid.UUID, estudiante_data: EstudianteUpdate) -> Estudiante:
         updated_estudiante = self.repo.update_estudiante(user_id, estudiante_data)
         if not updated_estudiante:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Estudiante not found")

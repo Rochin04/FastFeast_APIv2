@@ -24,6 +24,7 @@ async def create_usuario(usuario: UsuarioCreate, service: UsuarioService = Depen
 async def update_usuario(id: uuid.UUID, usuario: UsuarioUpdate, service: UsuarioService = Depends()):
     data = service.update_usuario(id, usuario)
     return {"data": data}
+    ##No deberia regresar la contraseña##
 
 @router.delete("/usuarios/{id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_usuario(id: uuid.UUID, service: UsuarioService = Depends()):
