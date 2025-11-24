@@ -16,12 +16,12 @@ async def lifespan(app: FastAPI):
     print("Lifespan ended.")
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(comida_router, prefix="/api/v1", tags=["Comidas"])
-app.include_router(category_routes, prefix="/api/v1", tags=["Categories"])
-app.include_router(usuario_router, prefix="/api/v1", tags=["Usuarios"])
-app.include_router(estudiante_router, prefix="/api/v1", tags=["Estudiantes"])
-app.include_router(comerciante_router, prefix="/api/v1", tags=["Comerciantes"])
-app.include_router(promocion_router, prefix="/api/v1", tags=["Promociones"])
+app.include_router(comida_router, prefix="/api/v1", tags=["Comidas"])#aqui se crean las comidas por los comerciantes
+app.include_router(category_routes, prefix="/api/v1", tags=["Categories"])#aqui se crean las categorias por los comerciantes
+app.include_router(usuario_router, prefix="/api/v1", tags=["Usuarios"])#aqui se crean los usuarios
+app.include_router(estudiante_router, prefix="/api/v1", tags=["Estudiantes"])#aqui se crean los estudiantes
+app.include_router(comerciante_router, prefix="/api/v1", tags=["Comerciantes"])#aqui se crean los comerciantes
+app.include_router(promocion_router, prefix="/api/v1", tags=["Promociones"])#aqui se crean las promociones por los comerciantes
 
 @app.get("/")
 async def root():
