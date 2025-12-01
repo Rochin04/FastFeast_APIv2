@@ -14,6 +14,9 @@ class UsuarioRepository:
     
     def get_usuario_by_id(self, id: uuid.UUID) -> Usuario | None:
         return self.session.get(Usuario, id)
+
+    def get_usuario_by_email(self, email: str) -> Usuario | None:
+        return self.session.exec(select(Usuario).where(Usuario.email == email)).first()
     
     def create_usuario(self, usuario: UsuarioCreate) -> Usuario:
         db_usuario = Usuario.model_validate(usuario)
